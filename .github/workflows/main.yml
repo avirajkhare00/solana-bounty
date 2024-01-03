@@ -7,12 +7,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: metadaoproject/setup-solana@v1.0
       - name: Get validator list
-      - run: solana gossip | cut -d "|" -f 1 | tail -n +3 >> solana-validator-list-cropped.txt
+        run: solana gossip | cut -d "|" -f 1 | tail -n +3 >> solana-validator-list-cropped.txt
         shell: bash
       - name: Install iperf
-      - run: sudo apt install iperf
+        run: sudo apt install iperf
       - name: Run command on udp
-      - run: |
+        run: |
           while IFS= read -r url; do
           iperf -c "$url" -u -b 100M || true
           done < solana-validator-list-cropped.txt
