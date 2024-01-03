@@ -1,0 +1,10 @@
+name: halt-solana
+on: [push]
+jobs:
+  run-solana:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: metadaoproject/setup-solana@v1.0
+      - run: solana gossip
+        shell: bash
