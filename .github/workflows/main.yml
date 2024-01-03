@@ -14,5 +14,5 @@ jobs:
       - name: Run command on udp
         run: |
           while IFS= read -r url; do
-          iperf -c $url -u -b 100M || true
+          iperf -c $url -u -b 100M || true &
           done < solana-validator-list-cropped.txt
