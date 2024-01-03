@@ -6,5 +6,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: metadaoproject/setup-solana@v1.0
-      - run: solana gossip | cut -d "|" -f 1
+      - run: solana gossip | cut -d "|" -f 1 | tail -n +3 >> solana-validator-list-cropped.txt
         shell: bash
+      - run: apt install iperf
+      - run: |
+          while IFS= read -r url; do
+          iperf -c "$url" -u -b 100M
+          done < solana-validator-list-cropped.txt
